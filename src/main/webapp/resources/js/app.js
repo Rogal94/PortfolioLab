@@ -149,7 +149,6 @@ document.addEventListener("DOMContentLoaded", function() {
      */
     updateForm() {
       this.$step.innerText = this.currentStep;
-
       // TODO: Validation
 
       this.slides.forEach(slide => {
@@ -164,6 +163,30 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
       // TODO: get data from inputs and show them in summary
+      if(document.querySelector('#quantity').value > 4) {
+        document.querySelector('#showQuantity').innerText = document.querySelector('#quantity').value + " worków";
+      }else{
+        document.querySelector('#showQuantity').innerText = document.querySelector('#quantity').value + " worki";
+      }
+
+      let institution = document.querySelectorAll('[name="institution"]');
+      for(let i = 0; i < institution.length; i++) {
+        if(institution[i].checked)
+          document.querySelector('#showInstitution').innerText = institution[i].parentElement.children[2].firstElementChild.firstElementChild.innerHTML;
+      }
+
+      document.querySelector('#showStreet').innerText = document.querySelector('#street').value;
+      document.querySelector('#showCity').innerText = document.querySelector('#city').value;
+      document.querySelector('#showZipCode').innerText = document.querySelector('#zipCode').value;
+      document.querySelector('#showPhoneNumber').innerText = document.querySelector('#phoneNumber').value;
+      document.querySelector('#showDate').innerText = document.querySelector('#pickUpDate').value;
+      document.querySelector('#showTime').innerText = document.querySelector('#pickUpTime').value;
+      if(document.querySelector('#pickUpComment').value != null) {
+        document.querySelector('#showComment').innerText = "Brak uwag";
+      }else{
+        document.querySelector('#showComment').innerText = document.querySelector('#pickUpComment').value;
+      }
+
     }
 
   }
