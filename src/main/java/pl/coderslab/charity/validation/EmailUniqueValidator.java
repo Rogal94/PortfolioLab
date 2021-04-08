@@ -24,6 +24,6 @@ public class EmailUniqueValidator implements ConstraintValidator<EmailUnique, St
         if ( value == null ) {
             return true;
         }
-        return userService.findByUserName(value) == null;
+        return userService.findByEmail(value) == null;
     }
 }

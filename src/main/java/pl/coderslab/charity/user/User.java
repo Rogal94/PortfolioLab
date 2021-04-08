@@ -20,7 +20,7 @@ public class User {
     @Column(nullable = false, unique = true, length = 60)
     @NotBlank(message = "CAN NOT BE EMPTY!")
     @EmailUnique(message = "EMAIL IS ALREADY EXIST!")
-    private String username;
+    private String email;
     @NotBlank(message = "CAN NOT BE EMPTY!")
     private String password;
     private int enabled;

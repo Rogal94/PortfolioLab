@@ -16,8 +16,7 @@
     <%@include file="/WEB-INF/views/jspf/navigationLogin.jspf"%>
     <div class="slogan container container--90">
         <h2>
-            Dziękujemy za przesłanie formularza Na maila prześlemy wszelkie
-            informacje o odbiorze.
+            Zalogowany jako admin.
         </h2>
     </div>
 </header>
@@ -25,4 +24,3 @@
 <script src="<c:url value="resources/js/app.js"/>"></script>
 </body>
 </html>
-

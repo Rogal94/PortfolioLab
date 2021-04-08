@@ -21,8 +21,8 @@
     <h2>Załóż konto</h2>
     <form:form modelAttribute="user">
         <div class="form-group">
-            <form:input type="email" path="username" placeholder="Email" />
-            <form:errors class="w3-text-red" path="username" cssStyle="color: red; margin: 5px; font-size: 15px"/>
+            <form:input type="email" path="email" placeholder="Email" />
+            <form:errors class="w3-text-red" path="email" cssStyle="color: red; margin: 5px; font-size: 15px"/>
         </div>
         <div class="form-group">
             <form:input type="text" path="firstName" placeholder="Imię" />
@@ -44,6 +44,9 @@
             <button class="btn" type="submit">Załóż konto</button>
         </div>
     </form:form>
+    <c:if test="${not empty error}">
+        <p style="color: red; margin: 5px; font-size: 15px">PASSWORD IS NOT THE SAME!</p>
+    </c:if>
 </section>
 <%@include file="/WEB-INF/views/jspf/footer.jspf"%>
 <script src="<c:url value="resources/js/app.js"/>"></script>

@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.coderslab.charity.user.User;
 import pl.coderslab.charity.user.UserService;
 
@@ -36,8 +37,18 @@ public class UserController {
         return "register";
     }
 
+    @GetMapping("/register/error")
+    public String registerError(Model model) {
+        model.addAttribute("error", "error");
+        return "register";
+    }
+
     @PostMapping("/register")
-    public String registerPost(@Valid User user, BindingResult result) {
+    public String registerPost(@Valid User user, BindingResult result, @RequestParam String password2, Model model) {
+        if(!user.getPassword().equals(password2)) {
+            model.addAttribute("error", "error");
+            return "redirect:/register/error";
+        }
         if(result.hasErrors()) {
             return "register";
         }

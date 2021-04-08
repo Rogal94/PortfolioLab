@@ -31,7 +31,7 @@ public class DonationController {
 
     @GetMapping("")
     public String formAction(@AuthenticationPrincipal UserDetails customUser, Model model){
-        User user = userService.findByUserName(customUser.getUsername());
+        User user = userService.findByEmail(customUser.getUsername());
         Donation donation = new Donation();
         model.addAttribute("categoriesList", categoryRepository.findAll());
         model.addAttribute("institutionList", institutionRepository.findAll());
@@ -42,7 +42,7 @@ public class DonationController {
 
     @PostMapping("")
     public String formActionPost(Donation donation, @AuthenticationPrincipal UserDetails customUser, Model model){
-        User user = userService.findByUserName(customUser.getUsername());
+        User user = userService.findByEmail(customUser.getUsername());
         model.addAttribute("user", user);
         donationRepository.save(donation);
         return "formConfirmation";

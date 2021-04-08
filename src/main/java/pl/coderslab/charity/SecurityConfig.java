@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import pl.coderslab.charity.security.LoginSuccessHandler;
 import pl.coderslab.charity.user.SpringDataUserDetailsService;
 
 @Configuration
@@ -22,14 +24,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new SpringDataUserDetailsService();
     }
 
+    @Bean
+    public AuthenticationSuccessHandler loginSuccessHandler(){
+        return new LoginSuccessHandler();
+    }
+
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/form/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .and().formLogin().loginPage("/login")
-                .defaultSuccessUrl("/form")
+                .and().formLogin().loginPage("/login").usernameParameter("email")
+                .successHandler(loginSuccessHandler())
                 .failureUrl("/login/error")
-                .and().logout().logoutSuccessUrl("/")
+                .and()
+                .logout().logoutSuccessUrl("/")
                 .permitAll();
     }
 }
