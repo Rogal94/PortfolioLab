@@ -33,11 +33,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/form/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .and().formLogin().loginPage("/login").usernameParameter("email")
+                .and()
+                .formLogin().loginPage("/login").usernameParameter("email")
+                .defaultSuccessUrl("/form")
                 .successHandler(loginSuccessHandler())
                 .failureUrl("/login/error")
                 .and()
-                .logout().logoutSuccessUrl("/")
-                .permitAll();
+                .logout().logoutSuccessUrl("/").permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/login");
     }
 }

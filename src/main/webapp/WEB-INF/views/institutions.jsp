@@ -21,13 +21,27 @@
     </div>
 </header>
 <section class="steps">
-    <h2>Panel</h2>
-
-    <a href="<c:url value="/admin/institutions"/>" class="btn btn--large">Fundacje</a>
-    <a href="<c:url value="/admin/admins"/>" class="btn btn--large">Administratorzy</a>
-    <a href="<c:url value="/admin/users"/>" class="btn btn--large">Użytkowanicy</a>
+    <div class="contact">
+        <h2>Lista Fundacji</h2>
+        <a href="<c:url value="/admin/institutions/add"/>" class="btn">Dodaj</a>
+        <c:forEach items="${institutionsList}" var="institution">
+            <div class="form-group form-group--50" style="margin:2em; font-size:2em; border: 0.1em solid black">
+                <span class="description">
+                    <div class="title">Fundacja “<span>${institution.name}</span>”</div>
+                    <div class="subtitle">
+                        Cel i misja: ${institution.description}
+                    </div>
+                </span>
+                <span>
+                    <a href="<c:url value="/admin/institutions/edit/${institution.id}"/>" class="btn">Edytuj</a>
+                    <a href="<c:url value="/admin/institutions/delete/${institution.id}"/>" class="btn">Usuń</a>
+                </span>
+            </div>
+        </c:forEach>
+    </div>
 </section>
 <%@include file="/WEB-INF/views/jspf/footer.jspf"%>
 <script src="<c:url value="resources/js/app.js"/>"></script>
 </body>
 </html>
+

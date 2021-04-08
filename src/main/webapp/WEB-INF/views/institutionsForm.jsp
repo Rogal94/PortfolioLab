@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -21,13 +22,24 @@
     </div>
 </header>
 <section class="steps">
-    <h2>Panel</h2>
+    <div class="contact" id="contact">
+        <h2>Fundacja</h2>
+        <form:form class="form--contact" modelAttribute="institution">
+            <div class="form-group form-group--50" style="font-size: 2em">Nazwa: <form:input type="text" path="name" placeholder="Nazwa"/></div>
+            <div class="form-group form-group--50" style="font-size: 2em">Cel i misja: <form:input type="text" path="description" placeholder="Cel i misja"/></div>
 
-    <a href="<c:url value="/admin/institutions"/>" class="btn btn--large">Fundacje</a>
-    <a href="<c:url value="/admin/admins"/>" class="btn btn--large">Administratorzy</a>
-    <a href="<c:url value="/admin/users"/>" class="btn btn--large">Użytkowanicy</a>
+            <c:if test="${not empty institution.name}">
+            <button class="btn" type="submit">Edytuj</button>
+            </c:if>
+            <c:if test="${empty institution.name}">
+                <button class="btn" type="submit">Dodaj</button>
+            </c:if>
+        </form:form>
+    </div>
 </section>
 <%@include file="/WEB-INF/views/jspf/footer.jspf"%>
 <script src="<c:url value="resources/js/app.js"/>"></script>
 </body>
 </html>
+
+

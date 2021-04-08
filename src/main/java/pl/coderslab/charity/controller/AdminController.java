@@ -26,4 +26,18 @@ public class AdminController {
         model.addAttribute("user", user);
         return "admin";
     }
+
+    @GetMapping("/admins")
+    public String adminAdmins(@AuthenticationPrincipal UserDetails customUser, Model model){
+        User user = userService.findByEmail(customUser.getUsername());
+        model.addAttribute("user", user);
+        return "admin";
+    }
+
+    @GetMapping("/users")
+    public String adminUsers(@AuthenticationPrincipal UserDetails customUser, Model model){
+        User user = userService.findByEmail(customUser.getUsername());
+        model.addAttribute("user", user);
+        return "admin";
+    }
 }
