@@ -181,12 +181,12 @@ document.addEventListener("DOMContentLoaded", function() {
       document.querySelector('#showPhoneNumber').innerText = document.querySelector('#phoneNumber').value;
       document.querySelector('#showDate').innerText = document.querySelector('#pickUpDate').value;
       document.querySelector('#showTime').innerText = document.querySelector('#pickUpTime').value;
-      if(document.querySelector('#pickUpComment').value != null) {
+      console.log(document.querySelector('#pickUpComment').value)
+      if(document.querySelector('#pickUpComment').value === "") {
         document.querySelector('#showComment').innerText = "Brak uwag";
       }else{
         document.querySelector('#showComment').innerText = document.querySelector('#pickUpComment').value;
       }
-
     }
 
   }

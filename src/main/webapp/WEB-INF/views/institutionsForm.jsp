@@ -25,9 +25,16 @@
     <div class="contact" id="contact">
         <h2>Fundacja</h2>
         <form:form class="form--contact" modelAttribute="institution">
-            <div class="form-group form-group--50" style="font-size: 2em">Nazwa: <form:input type="text" path="name" placeholder="Nazwa"/></div>
-            <div class="form-group form-group--50" style="font-size: 2em">Cel i misja: <form:input type="text" path="description" placeholder="Cel i misja"/></div>
-
+            <div class="form-group form-group--50" style="font-size: 2em">
+                Nazwa:
+                <form:input type="text" path="name" placeholder="Nazwa"/>
+                <form:errors path="name" cssStyle="color: red; margin: 5px; font-size: 15px"/>
+            </div>
+            <div class="form-group form-group--50" style="font-size: 2em">
+                Cel i misja:
+                <form:input type="text" path="description" placeholder="Cel i misja"/>
+                <form:errors path="name" cssStyle="color: red; margin: 5px; font-size: 15px"/>
+            </div>
             <c:if test="${not empty institution.name}">
             <button class="btn" type="submit">Edytuj</button>
             </c:if>

@@ -3,9 +3,11 @@ package pl.coderslab.charity.model;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.coderslab.charity.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -29,5 +31,9 @@ public class Donation {
     private LocalDate pickUpDate;
     private LocalTime pickUpTime;
     private String pickUpComment;
-
+    @ManyToOne
+    private User user;
+    private String status;
+    private String received;
+    private String created;
 }
