@@ -45,10 +45,17 @@
     <div class="contact">
         <h2>Lista Zbiórek</h2>
         <a href="<c:url value="/form"/>" class="btn">Dodaj</a>
-        <c:forEach items="${donationList}" var="donation">
             <div class="form-group form-group--50" style="margin:2em; font-size:2em; border: 0.1em solid black">
                 <span class="description">
-                    <div class="title">Fundacja “<span>${donation.institution.name}</span>”</div>
+                    <div class="title">Fundacja “<span>${donation.institution.name}</span></div>
+                    <div class="title">Dary:
+                        <span>
+                            <c:forEach items="${donation.categories}" var="category">
+                                <span> ${category.name}</span>
+                            </c:forEach>
+                    </div>
+                    <div class="title">Liczba worków: <span>${donation.quantity}</span></div>
+                    <div class="title">Data odbioru: <span>${donation.pickUpDate} ${donation.pickUpTime}</span></div>
                     <div class="subtitle">
                         Status: <span>${donation.status}</span>
                     </div>
@@ -62,14 +69,17 @@
                     </div>
                 </span>
                 <span>
-                    <a href="<c:url value="/user/donations/details/${donation.id}"/>" class="btn">Szczegóły</a>
+                    <a href="<c:url value="/user/donations/details/${donation.id}"/>" class="btn">Wróć</a>
+                    <c:if test="${donation.status.equals('nieodebrane')}">
+                        <a href="<c:url value="/user/donations/received/${donation.id}"/>" class="btn">Odebrane</a>
+                    </c:if>
                 </span>
             </div>
-        </c:forEach>
     </div>
 </section>
 <%@include file="/WEB-INF/views/jspf/footer.jspf"%>
 <script src="<c:url value="resources/js/app.js"/>"></script>
 </body>
 </html>
+
 

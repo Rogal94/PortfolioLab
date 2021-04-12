@@ -7,15 +7,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import pl.coderslab.charity.model.Donation;
 import pl.coderslab.charity.model.DonationRepository;
 import pl.coderslab.charity.user.User;
 import pl.coderslab.charity.user.UserService;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -86,5 +86,25 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("donationList",donationRepository.findAllByUserIdOrderByStatusDescReceivedDescCreatedDesc(user.getId()));
         return "donations";
+    }
+
+    @GetMapping("/donations/details/{id}")
+    public String userDonationDetails(@AuthenticationPrincipal UserDetails customUser, Model model, @PathVariable Long id) {
+        User user = userService.findByEmail(customUser.getUsername());
+        model.addAttribute("user", user);
+        model.addAttribute("donation",donationRepository.getOne(id));
+        return "donationDetails";
+    }
+
+    @GetMapping("/donations/received/{id}")
+    public String userDonationForm(@AuthenticationPrincipal UserDetails customUser, Model model, @PathVariable Long id) {
+        User user = userService.findByEmail(customUser.getUsername());
+        model.addAttribute("user", user);
+        Donation donation = donationRepository.getOne(id);
+        donation.setStatus("odebrane");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        donation.setReceived(LocalDateTime.now().format(formatter));
+        model.addAttribute("donation",donationRepository.getOne(id));
+        return "donationDetails";
     }
 }
