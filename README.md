@@ -1,12 +1,10 @@
-<img alt="Logo" src="http://coderslab.pl/svg/logo-coderslab.svg" width="400">
+## PROJEKT "ODDAM W DOBRE RĘCE":
 
+PROJEKT "ODDAM W DOBRE RĘCE":
 
-Przed przystąpieniem do pracy  przeczytaj poniższe wskazówki.
-## Jak zacząć?
+https://github.com/Rogal94/PortfolioLab
 
-1. Zaimportuj projekt jako projekt `Maven`, wg poniższych wskazówek:
+Aplikacja do łatwego przekazywania darów na rzecz fundacji.
 
-	* W `IntelliJ` wybieramy: `File –> New –> Project from Existing Sources...`
-	* Wskazujemy lokalizację katalogu ze sklonowanym projektem i zatwierdzamy.
-	* Następnie w nowym oknie wybieramy: `Import project from external model` i wskazujemy `Maven`
-	* Wybieramy kolejno opcje: `Next –> Next –> Next –> Finish`
+Wykorzystane narzędzia:
+Spring Boot, Hibernate, Spring Security
