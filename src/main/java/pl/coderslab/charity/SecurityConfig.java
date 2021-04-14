@@ -7,8 +7,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler;
 import pl.coderslab.charity.security.LoginSuccessHandler;
 import pl.coderslab.charity.user.SpringDataUserDetailsService;
+
+import java.util.HashMap;
 
 @Configuration
 @EnableWebSecurity
@@ -28,6 +31,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationSuccessHandler loginSuccessHandler(){
         return new LoginSuccessHandler();
     }
+    @Bean
+    public ExceptionMappingAuthenticationFailureHandler loginMappingFailureHandler() {
+        ExceptionMappingAuthenticationFailureHandler exceptionMapping = new ExceptionMappingAuthenticationFailureHandler();
+        HashMap<String, String> failureUrlMap = new HashMap<String, String>();
+        failureUrlMap.put("org.springframework.security.authentication.BadCredentialsException", "/login/error");
+        failureUrlMap.put("org.springframework.security.authentication.LockedException", "/login/locked");
+        failureUrlMap.put("org.springframework.security.authentication.DisabledException", "/login/disabled");
+        failureUrlMap.put("org.springframework.security.authentication.AccountExpiredException", "/login/error");
+        failureUrlMap.put("org.springframework.security.authentication.CredentialsExpiredException", "/login/error");
+        failureUrlMap.put("org.springframework.security.authentication.AuthenticationServiceException", "/login/error");
+        exceptionMapping.setExceptionMappings(failureUrlMap);
+        return exceptionMapping;
+    }
 
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -37,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/login").usernameParameter("email")
                 .defaultSuccessUrl("/form")
                 .successHandler(loginSuccessHandler())
-                .failureUrl("/login/error")
+                .failureHandler(loginMappingFailureHandler())
                 .and()
                 .logout().logoutSuccessUrl("/").permitAll()
                 .and()

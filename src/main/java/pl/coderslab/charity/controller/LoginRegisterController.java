@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.coderslab.charity.user.User;
@@ -25,9 +26,9 @@ public class LoginRegisterController {
         return "login";
     }
 
-    @GetMapping("/login/error")
-    public String loginError(Model model) {
-        model.addAttribute("error", "error");
+    @GetMapping("/login/{error}")
+    public String loginError(Model model, @PathVariable String error) {
+        model.addAttribute("error", error);
         return "login";
     }
 

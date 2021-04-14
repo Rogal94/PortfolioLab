@@ -32,10 +32,10 @@
                 </span>
                 <span>
                     <a href="<c:url value="/admin/users/edit/${user.id}"/>" class="btn">Edytuj</a>
-                    <c:if test="${not empty user.blocked}">
+                    <c:if test="${user.accountNonLocked == false}">
                         <a href="<c:url value="/admin/users/block/${user.id}"/>" class="btn">Odblokuj</a>
                     </c:if>
-                    <c:if test="${empty user.blocked}">
+                    <c:if test="${user.accountNonLocked == true}">
                         <a href="<c:url value="/admin/users/block/${user.id}"/>" class="btn">Zablokuj</a>
                     </c:if>
                     <a href="<c:url value="/admin/users/delete/${user.id}"/>" class="btn">Usuń</a>

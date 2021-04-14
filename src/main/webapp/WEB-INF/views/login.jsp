@@ -28,10 +28,15 @@
             <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
         </div>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-        <c:if test="${not empty error}">
+        <c:if test="${error.equals('error')}">
             <p style="color: red; margin: 5px; font-size: 15px">INVALID LOGIN OR PASSWORD!</p>
         </c:if>
-
+        <c:if test="${error.equals('blocked')}">
+            <p style="color: red; margin: 5px; font-size: 15px">ACCOUNT BLOCKED!</p>
+        </c:if>
+        <c:if test="${error.equals('disabled')}">
+            <p style="color: red; margin: 5px; font-size: 15px">ACCOUNT NOT ACTIVE! </p>
+        </c:if>
         <div class="form-group form-group--buttons">
             <a href="#" class="btn btn--without-border">Załóż konto</a>
             <button class="btn" type="submit">Zaloguj się</button>

@@ -2,6 +2,7 @@ package pl.coderslab.charity.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -75,11 +76,7 @@ public class AdminUsersController {
     @GetMapping("/block/{id}")
     public String adminUsersBlock(@PathVariable Long id){
         User userBlock = userRepository.getOne(id);
-        if(userBlock.getBlocked() == null) {
-            userBlock.setBlocked(1);
-        }else{
-            userBlock.setBlocked(null);
-        }
+        userBlock.setAccountNonLocked(!userBlock.isAccountNonLocked());
         userRepository.save(userBlock);
         return "redirect:/admin/users";
     }
