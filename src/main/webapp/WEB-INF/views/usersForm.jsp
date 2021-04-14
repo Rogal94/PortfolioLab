@@ -14,15 +14,17 @@
 </head>
 <body>
 <header>
-    <%@include file="/WEB-INF/views/jspf/navigation.jspf"%>
+    <%@include file="/WEB-INF/views/jspf/navigationLogin.jspf"%>
 </header>
 
 <section class="login-page">
-    <h2>Załóż konto</h2>
+    <h2>Edytuj konto</h2>
     <form:form modelAttribute="user">
         <div class="form-group">
             <form:input type="email" path="email" placeholder="Email" required="required"/>
-            <form:errors path="email" cssStyle="color: red; margin: 5px; font-size: 15px"/>
+            <c:if test="${empty noError}">
+                <form:errors path="email" cssStyle="color: red; margin: 5px; font-size: 15px"/>
+            </c:if>
         </div>
         <div class="form-group">
             <form:input type="text" path="firstName" placeholder="Imię"/>
@@ -32,24 +34,16 @@
             <form:input type="text" path="lastName" placeholder="Nazwisko"/>
             <form:errors path="firstName" cssStyle="color: red; margin: 5px; font-size: 15px"/>
         </div>
-        <div class="form-group">
-            <form:input type="password" path="password" placeholder="Hasło" required="required"/>
-            <form:errors path="password" cssStyle="color: red; margin: 5px; font-size: 15px"/>
-        </div>
-        <div class="form-group">
-            <input type="password" name="password2" placeholder="Powtórz hasło" required/>
-        </div>
+        <form:hidden path="password" value="cantBeNull"/>
         <div class="form-group form-group--buttons">
-            <a href="login.html" class="btn btn--without-border">Zaloguj się</a>
-            <button class="btn" type="submit">Załóż konto</button>
+            <button class="btn" type="submit">Edytuj konto</button>
         </div>
     </form:form>
-    <c:if test="${not empty error}">
-        <p style="color: red; margin: 5px; font-size: 15px">PASSWORD IS NOT THE SAME!</p>
-    </c:if>
 </section>
 <%@include file="/WEB-INF/views/jspf/footer.jspf"%>
 <script src="<c:url value="resources/js/app.js"/>"></script>
 </body>
 </html>
+
+
 

@@ -2,12 +2,10 @@ package pl.coderslab.charity.user;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.coderslab.charity.model.Donation;
 import pl.coderslab.charity.validation.EmailUnique;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,7 +21,8 @@ public class User {
     private String email;
     @NotBlank(message = "CAN NOT BE EMPTY!")
     private String password;
-    private int enabled;
+    private Integer enabled;
+    private Integer blocked;
     private String firstName;
     private String lastName;
 

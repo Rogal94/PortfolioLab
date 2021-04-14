@@ -35,6 +35,7 @@ public class UserController {
         User user = userService.findByEmail(customUser.getUsername());
         user.setPassword("");
         model.addAttribute("user", user);
+        model.addAttribute("loggedUser", user);
         return "userEdit";
     }
 
@@ -44,6 +45,7 @@ public class UserController {
         User user = userService.findByEmail(customUser.getUsername());
         user.setPassword("");
         model.addAttribute("user", user);
+        model.addAttribute("loggedUser", user);
         return "userEdit";
     }
 
@@ -83,7 +85,7 @@ public class UserController {
     @GetMapping("/donations")
     public String userDonations(@AuthenticationPrincipal UserDetails customUser, Model model) {
         User user = userService.findByEmail(customUser.getUsername());
-        model.addAttribute("user", user);
+        model.addAttribute("loggedUser", user);
         model.addAttribute("donationList",donationRepository.findAllByUserIdOrderByStatusDescReceivedDescCreatedDesc(user.getId()));
         return "donations";
     }
@@ -91,7 +93,7 @@ public class UserController {
     @GetMapping("/donations/details/{id}")
     public String userDonationDetails(@AuthenticationPrincipal UserDetails customUser, Model model, @PathVariable Long id) {
         User user = userService.findByEmail(customUser.getUsername());
-        model.addAttribute("user", user);
+        model.addAttribute("loggedUser", user);
         model.addAttribute("donation",donationRepository.getOne(id));
         return "donationDetails";
     }
@@ -99,9 +101,10 @@ public class UserController {
     @GetMapping("/donations/received/{id}")
     public String userDonationForm(@AuthenticationPrincipal UserDetails customUser, Model model, @PathVariable Long id) {
         User user = userService.findByEmail(customUser.getUsername());
-        model.addAttribute("user", user);
+        model.addAttribute("loggedUser", user);
         Donation donation = donationRepository.getOne(id);
         donation.setStatus("odebrane");
+        donationRepository.save(donation);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         donation.setReceived(LocalDateTime.now().format(formatter));
         model.addAttribute("donation",donationRepository.getOne(id));

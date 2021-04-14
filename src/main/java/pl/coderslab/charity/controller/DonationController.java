@@ -39,14 +39,14 @@ public class DonationController {
         model.addAttribute("categoriesList", categoryRepository.findAll());
         model.addAttribute("institutionList", institutionRepository.findAll());
         model.addAttribute("donation", donation);
-        model.addAttribute("user", user);
+        model.addAttribute("loggedUser", user);
         return "form";
     }
 
     @PostMapping("")
     public String formActionPost(Donation donation, @AuthenticationPrincipal UserDetails customUser, Model model){
         User user = userService.findByEmail(customUser.getUsername());
-        model.addAttribute("user", user);
+        model.addAttribute("loggedUser", user);
         donation.setStatus("nieodebrane");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         donation.setCreated(LocalDateTime.now().format(formatter));

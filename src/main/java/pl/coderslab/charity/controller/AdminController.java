@@ -23,21 +23,7 @@ public class AdminController {
     @GetMapping("")
     public String admin(@AuthenticationPrincipal UserDetails customUser, Model model){
         User user = userService.findByEmail(customUser.getUsername());
-        model.addAttribute("user", user);
-        return "admin";
-    }
-
-    @GetMapping("/admins")
-    public String adminAdmins(@AuthenticationPrincipal UserDetails customUser, Model model){
-        User user = userService.findByEmail(customUser.getUsername());
-        model.addAttribute("user", user);
-        return "admin";
-    }
-
-    @GetMapping("/users")
-    public String adminUsers(@AuthenticationPrincipal UserDetails customUser, Model model){
-        User user = userService.findByEmail(customUser.getUsername());
-        model.addAttribute("user", user);
+        model.addAttribute("loggedUser", user);
         return "admin";
     }
 }

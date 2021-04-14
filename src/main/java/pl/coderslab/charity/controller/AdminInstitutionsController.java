@@ -33,7 +33,7 @@ public class AdminInstitutionsController {
         List<Institution> institutionList = institutionRepository.findAll();
         User user = userService.findByEmail(customUser.getUsername());
         model.addAttribute("institutionsList", institutionList);
-        model.addAttribute("user", user);
+        model.addAttribute("loggedUser", user);
         return "institutions";
     }
 
@@ -42,7 +42,7 @@ public class AdminInstitutionsController {
         Institution institution = new Institution();
         User user = userService.findByEmail(customUser.getUsername());
         model.addAttribute("institution", institution);
-        model.addAttribute("user", user);
+        model.addAttribute("loggedUser", user);
         return "institutionsForm";
     }
     @PostMapping("/add")
@@ -51,7 +51,7 @@ public class AdminInstitutionsController {
             return "institutionsForm";
         }
         User user = userService.findByEmail(customUser.getUsername());
-        model.addAttribute("user", user);
+        model.addAttribute("LoggedUser", user);
         institutionRepository.save(institution);
         return "redirect:/admin/institutions";
     }
@@ -60,7 +60,7 @@ public class AdminInstitutionsController {
     public String adminInstitutionsEdit(@AuthenticationPrincipal UserDetails customUser, Model model, @PathVariable Long id){
         User user = userService.findByEmail(customUser.getUsername());
         model.addAttribute("institution", institutionRepository.getOne(id));
-        model.addAttribute("user", user);
+        model.addAttribute("loggedUser", user);
         return "institutionsForm";
     }
 
@@ -70,7 +70,7 @@ public class AdminInstitutionsController {
             return "institutionsForm";
         }
         User user = userService.findByEmail(customUser.getUsername());
-        model.addAttribute("user", user);
+        model.addAttribute("loggedUser", user);
         institutionRepository.save(institution);
         return "redirect:/admin/institutions";
     }
@@ -78,7 +78,7 @@ public class AdminInstitutionsController {
     @GetMapping("/delete/{id}")
     public String adminInstitutionsDelete(@AuthenticationPrincipal UserDetails customUser, Model model, @PathVariable Long id){
         User user = userService.findByEmail(customUser.getUsername());
-        model.addAttribute("user", user);
+        model.addAttribute("loggedUser", user);
         institutionRepository.delete(institutionRepository.getOne(id));
         return "redirect:/admin/institutions";
     }

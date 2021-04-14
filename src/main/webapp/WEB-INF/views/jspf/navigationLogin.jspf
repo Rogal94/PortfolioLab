@@ -2,7 +2,7 @@
 <nav class="container container--70">
     <ul class="nav--actions">
         <li class="logged-user">
-            Witaj ${user.firstName}
+            Witaj ${loggedUser.firstName}
             <ul class="dropdown">
                 <li><a href="<c:url value="/user/edit"/>">Profil</a></li>
                 <li><a href="<c:url value="/user/donations"/>">Moje zbiórki</a></li>

@@ -69,7 +69,7 @@
                     </div>
                 </span>
                 <span>
-                    <a href="<c:url value="/user/donations/details/${donation.id}"/>" class="btn">Wróć</a>
+                    <a href="<c:url value="/user/donations"/>" class="btn">Wróć</a>
                     <c:if test="${donation.status.equals('nieodebrane')}">
                         <a href="<c:url value="/user/donations/received/${donation.id}"/>" class="btn">Odebrane</a>
                     </c:if>
