@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.coderslab.charity.user.User;
 import pl.coderslab.charity.user.UserService;
+import pl.coderslab.charity.email.EmailService;
 
 import javax.validation.Valid;
 
@@ -16,9 +17,11 @@ import javax.validation.Valid;
 public class LoginRegisterController {
 
     private final UserService userService;
+    private final EmailService emailService;
 
-    public LoginRegisterController(UserService userService) {
+    public LoginRegisterController(UserService userService, EmailService emailService) {
         this.userService = userService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/login")
@@ -55,6 +58,9 @@ public class LoginRegisterController {
             return "register";
         }
         userService.saveUser(user);
+        String subject = "Witamy";
+        String text = "Witamy";
+        emailService.sendSimpleMessage(user.getEmail(),subject,text);
         return "redirect:/login";
     }
 }
