@@ -14,34 +14,34 @@
 </head>
 <body>
 <header>
-    <%@include file="/WEB-INF/views/jspf/navigationLogin.jspf"%>
+    <%@include file="/WEB-INF/views/jspf/navigation.jspf"%>
 </header>
 
 <section class="login-page">
-    <h2>Edytuj konto</h2>
-    <form:form modelAttribute="user">
+    <h2>Twoje hasło zostało zresetowane. Wpisz dane aby ustawic nowe.</h2>
+    <form:form modelAttribute="user" action="/reset/password">
         <div class="form-group">
             <form:input type="email" path="email" placeholder="Email" required="required"/>
-            <c:if test="${empty noError}">
-                <form:errors path="email" cssStyle="color: red; margin: 5px; font-size: 15px"/>
-            </c:if>
+            <form:errors path="email" cssStyle="color: red; margin: 5px; font-size: 15px"/>
         </div>
         <div class="form-group">
-            <form:input type="text" path="firstName" placeholder="Imię"/>
-            <form:errors path="firstName" cssStyle="color: red; margin: 5px; font-size: 15px"/>
+            <form:input type="password" path="password" placeholder="Nowe hasło" required="required"/>
+            <form:errors path="password" cssStyle="color: red; margin: 5px; font-size: 15px"/>
         </div>
         <div class="form-group">
-            <form:input type="text" path="lastName" placeholder="Nazwisko"/>
-            <form:errors path="firstName" cssStyle="color: red; margin: 5px; font-size: 15px"/>
-        </div>
-        <form:hidden path="password" value="cantBeNull"/>
-        <div class="form-group form-group--buttons">
-            <button class="btn" type="submit">Edytuj konto</button>
+            <input type="password" name="password2" placeholder="Powtórz hasło" required/>
         </div>
         <div class="form-group form-group--buttons">
-            <a href="<c:url value="admin/users/password/${user.id}"/>" class="btn">Reset hasła</a>
+            <a href="login.html" class="btn btn--without-border">Zaloguj się</a>
+            <button class="btn" type="submit">Załóż konto</button>
         </div>
     </form:form>
+    <c:if test="${error.equals('error')}">
+        <p style="color: red; margin: 5px; font-size: 15px">PASSWORD IS NOT THE SAME!</p>
+    </c:if>
+    <c:if test="${error.equals('email')}">
+        <p style="color: red; margin: 5px; font-size: 15px">WRONG EMAIL!</p>
+    </c:if>
 </section>
 <%@include file="/WEB-INF/views/jspf/footer.jspf"%>
 <script src="<c:url value="resources/js/app.js"/>"></script>

@@ -80,4 +80,12 @@ public class AdminUsersController {
         userRepository.save(userBlock);
         return "redirect:/admin/users";
     }
+
+    @GetMapping("/password/{id}")
+    public String adminUsersPasswordChange(@PathVariable Long id){
+        User user = userRepository.getOne(id);
+        user.setAccountNonExpired(false);
+        userRepository.save(user);
+        return "redirect:/admin/users";
+    }
 }

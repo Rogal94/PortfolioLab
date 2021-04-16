@@ -25,20 +25,38 @@
         </div>
         <div class="form-group">
             <input type="password" name="password" placeholder="Hasło" required/>
-            <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
+            <a href="<c:url value="/password"/>" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
         </div>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
         <c:if test="${error.equals('error')}">
-            <p style="color: red; margin: 5px; font-size: 15px">INVALID LOGIN OR PASSWORD!</p>
+            <p style="color: red; margin: 5px; font-size: 15px">INVALID LOGIN OR PASSWORD! </p>
         </c:if>
         <c:if test="${error.equals('blocked')}">
-            <p style="color: red; margin: 5px; font-size: 15px">ACCOUNT BLOCKED!</p>
+            <p style="color: red; margin: 5px; font-size: 15px">ACCOUNT BLOCKED! </p>
         </c:if>
         <c:if test="${error.equals('disabled')}">
             <p style="color: red; margin: 5px; font-size: 15px">ACCOUNT NOT ACTIVE! </p>
         </c:if>
+        <c:if test="${error.equals('tokenEnabled')}">
+            <p style="color: cornflowerblue; margin: 5px; font-size: 15px">CONFIRMATION EMAIL WAS SEND! </p>
+        </c:if>
+        <c:if test="${error.equals('enabled')}">
+            <p style="color: cornflowerblue; margin: 5px; font-size: 15px">YOUR ACCOUNT IS ACTIVE NOW! </p>
+        </c:if>
+        <c:if test="${error.equals('unValid')}">
+            <p style="color: red; margin: 5px; font-size: 15px">TOKEN EXPIRED! </p>
+        </c:if>
+        <c:if test="${error.equals('tokenPassword')}">
+            <p style="color: cornflowerblue; margin: 5px; font-size: 15px">EMAIL WITH PASSWORD RESET WAS SEND! </p>
+        </c:if>
+        <c:if test="${error.equals('noExist')}">
+            <p style="color: red; margin: 5px; font-size: 15px">USER IS NOT EXIST! </p>
+        </c:if>
+        <c:if test="${error.equals('success')}">
+            <p style="color: cornflowerblue; margin: 5px; font-size: 15px">PASSWORD CHANGE SUCCESSFUL! </p>
+        </c:if>
         <div class="form-group form-group--buttons">
-            <a href="#" class="btn btn--without-border">Załóż konto</a>
+            <a href="<c:url value="/register"/>" class="btn btn--without-border">Załóż konto</a>
             <button class="btn" type="submit">Zaloguj się</button>
         </div>
     </form>

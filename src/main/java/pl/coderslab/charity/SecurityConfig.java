@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         failureUrlMap.put("org.springframework.security.authentication.BadCredentialsException", "/login/error");
         failureUrlMap.put("org.springframework.security.authentication.LockedException", "/login/locked");
         failureUrlMap.put("org.springframework.security.authentication.DisabledException", "/login/disabled");
-        failureUrlMap.put("org.springframework.security.authentication.AccountExpiredException", "/login/error");
+        failureUrlMap.put("org.springframework.security.authentication.AccountExpiredException", "/reset/password");
         failureUrlMap.put("org.springframework.security.authentication.CredentialsExpiredException", "/login/error");
         failureUrlMap.put("org.springframework.security.authentication.AuthenticationServiceException", "/login/error");
         exceptionMapping.setExceptionMappings(failureUrlMap);
@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/password/**","/token/**","/reset/**").permitAll()
                 .antMatchers("/form/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()

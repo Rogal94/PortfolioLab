@@ -19,21 +19,9 @@
 
 <section class="login-page">
     <h2>Załóż konto</h2>
-    <form:form modelAttribute="user" action="/register">
+    <form:form modelAttribute="user" action="/token/password/${token}">
         <div class="form-group">
-            <form:input type="email" path="email" placeholder="Email" required="required"/>
-            <form:errors path="email" cssStyle="color: red; margin: 5px; font-size: 15px"/>
-        </div>
-        <div class="form-group">
-            <form:input type="text" path="firstName" placeholder="Imię"/>
-            <form:errors path="firstName" cssStyle="color: red; margin: 5px; font-size: 15px"/>
-        </div>
-        <div class="form-group">
-            <form:input type="text" path="lastName" placeholder="Nazwisko"/>
-            <form:errors path="firstName" cssStyle="color: red; margin: 5px; font-size: 15px"/>
-        </div>
-        <div class="form-group">
-            <form:input type="password" path="password" placeholder="Hasło" required="required"/>
+            <form:input type="password" path="password" placeholder="Nowe hasło" required="required"/>
             <form:errors path="password" cssStyle="color: red; margin: 5px; font-size: 15px"/>
         </div>
         <div class="form-group">
@@ -52,4 +40,5 @@
 <script src="<c:url value="resources/js/app.js"/>"></script>
 </body>
 </html>
+
 
