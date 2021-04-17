@@ -22,7 +22,6 @@
     <form:form modelAttribute="user" action="/reset/password">
         <div class="form-group">
             <form:input type="email" path="email" placeholder="Email" required="required"/>
-            <form:errors path="email" cssStyle="color: red; margin: 5px; font-size: 15px"/>
         </div>
         <div class="form-group">
             <form:input type="password" path="password" placeholder="Nowe hasło" required="required"/>

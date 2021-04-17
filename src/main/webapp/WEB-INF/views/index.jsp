@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -13,7 +14,12 @@
 </head>
 <body>
 <header class="header--main-page">
-    <%@include file="/WEB-INF/views/jspf/navigation.jspf"%>
+    <sec:authorize access="isAuthenticated()">
+    <%@include file="/WEB-INF/views/jspf/navigationLogin.jspf"%>
+    </sec:authorize>
+    <sec:authorize access="!isAuthenticated()">
+        <%@include file="/WEB-INF/views/jspf/navigation.jspf"%>
+    </sec:authorize>
     <div class="slogan container container--90">
         <div class="slogan--item">
             <h1>

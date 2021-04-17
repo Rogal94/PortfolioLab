@@ -39,7 +39,7 @@
             <button class="btn" type="submit">Edytuj konto</button>
         </div>
         <div class="form-group form-group--buttons">
-            <a href="<c:url value="admin/users/password/${user.id}"/>" class="btn">Reset hasła</a>
+            <a href="<c:url value="/admin/users/password/${user.id}"/>" class="btn">Reset hasła</a>
         </div>
     </form:form>
 </section>

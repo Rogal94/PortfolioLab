@@ -14,7 +14,7 @@
 </head>
 <body>
 <header>
-    <%@include file="/WEB-INF/views/jspf/navigation.jspf"%>
+    <%@include file="/WEB-INF/views/jspf/navigationLogin.jspf"%>
 </header>
 
 <section class="login-page">

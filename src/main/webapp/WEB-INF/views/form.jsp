@@ -99,7 +99,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <form:input path="quantity" type="number" step="1" min="1" />
+                        <form:input path="quantity" type="number" step="1" min="1" required="required"/>
                     </label>
                 </div>
 
@@ -116,7 +116,7 @@
                 <c:forEach var="institution" items="${institutionList}">
                 <div class="form-group form-group--checkbox">
                     <label>
-                        <form:radiobutton path="institution" value="${institution}"/>
+                        <form:radiobutton path="institution" value="${institution}" required="required"/>
                         <span class="checkbox radio"></span>
                         <span class="description">
                             <div class="title">Fundacja “<span>${institution.name}</span>”</div>
@@ -142,22 +142,22 @@
                     <div class="form-section--column">
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Ulica <form:input path="street" /> </label>
+                            <label> Ulica <form:input path="street" required="required"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Miasto <form:input path="city" /> </label>
+                            <label> Miasto <form:input path="city" required="required"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <form:input path="zipCode" />
+                                Kod pocztowy <form:input path="zipCode" required="required"/>
                             </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Numer telefonu <form:input path="phoneNumber" />
+                                Numer telefonu <form:input path="phoneNumber" required="required"/>
                             </label>
                         </div>
                     </div>
@@ -165,11 +165,11 @@
                     <div class="form-section--column">
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <form:input type="date" path="pickUpDate" /> </label>
+                            <label> Data <form:input type="date" path="pickUpDate" required="required"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Godzina <form:input type="time" path="pickUpTime" /> </label>
+                            <label> Godzina <form:input type="time" path="pickUpTime" required="required"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
